@@ -15,6 +15,8 @@ private:
 	};
 	Info *info;
 	static int size;
+	bool CheckAvailability(const char *count)const;
+	void InfoAboutOneContact(int i)const;
 public:
 	PhoneBook();
 	void AddContact(const char *_name, const char *_number, const char* _adress);

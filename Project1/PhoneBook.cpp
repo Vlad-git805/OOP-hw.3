@@ -4,7 +4,27 @@ int PhoneBook::size = 0;
 
 PhoneBook::PhoneBook()
 {
+	info = nullptr;
 	size = 0;
+}
+
+bool PhoneBook::CheckAvailability(const char *count)const
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (strcmp(info[i].name, count) == 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void PhoneBook::InfoAboutOneContact(int i)const
+{
+	cout << "Name: " << info[i].name << endl;
+	cout << "Number: " << info[i].number << endl;
+	cout << "Adress: " << info[i].adress << endl;
 }
 
 void PhoneBook::AddContact(const char *_name, const char *_number, const char* _adress)
@@ -24,26 +44,33 @@ void PhoneBook::AddContact(const char *_name, const char *_number, const char* _
 
 void PhoneBook::DeleteContact(const char *_name) 
 {
-	int cnt = 0;
-	for (int i = 0; i < size; i++)
+	if (CheckAvailability(_name) == true)
 	{
-		if (strcmp(info[i].name, _name) == 0)
+		int cnt = 0;
+		for (int i = 0; i < size; i++)
 		{
-			cnt++;
+			if (strcmp(info[i].name, _name) == 0)
+			{
+				cnt++;
+			}
 		}
+		Info * tempInf = new Info[size - cnt];
+		for (int i = 0, count = 0; i < size; i++)
+		{
+			if (strcmp(info[i].name, _name) != 0)
+			{
+				tempInf[count] = info[i];
+				count++;
+			}
+		}
+		delete[]info;
+		size -= cnt;
+		info = tempInf;
 	}
-	Info * tempInf = new Info[size - cnt];
-	for (int i = 0, count = 0; i < size; i++)
+	else
 	{
-		if(strcmp(info[i].name, _name) != 0)
-		{ 
-			tempInf[count] = info[i];
-			count++;
-		}
+		cout << "There are no such name in phone book" << endl;
 	}
-	delete[]info;
-	size -= cnt;
-	info = tempInf;
 }
 
 void PhoneBook::FindContactByName(const char *_name)const
@@ -52,9 +79,7 @@ void PhoneBook::FindContactByName(const char *_name)const
 	{
 		if (strcmp(info[i].name, _name) == 0)
 		{
-			cout << "Name: " << info[i].name << endl;
-			cout << "Number: " << info[i].number << endl;
-			cout << "Adress: " << info[i].adress << endl;
+			InfoAboutOneContact(i);
 		}
 	}
 }
@@ -65,9 +90,7 @@ void PhoneBook::FindContactByNumber(const char *_number)const
 	{
 		if (strcmp(info[i].number, _number) == 0)
 		{
-			cout << "Name: " << info[i].name << endl;
-			cout << "Number: " << info[i].number << endl;
-			cout << "Adress: " << info[i].adress << endl;
+			InfoAboutOneContact(i);
 		}
 	}
 }
@@ -77,9 +100,7 @@ void PhoneBook::ShowAllContacts()const
 	for (int i = 0; i < size; i++)
 	{
 		cout << "--------------------" << i + 1 << " contact--------------------" << endl;
-		cout << "Name: " << info[i].name << endl;
-		cout << "Number: " << info[i].number << endl;
-		cout << "Adress: " << info[i].adress << endl;
+		InfoAboutOneContact(i);
 	}
 	
 }

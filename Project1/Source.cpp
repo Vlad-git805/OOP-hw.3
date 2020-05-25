@@ -14,16 +14,16 @@ int main()
 	//cout << book.GetCountOfContacts();
 	//cout << endl;
 
-	//PhoneBook book;
-	//book.AddContact("Vlad", "0", "0");
-	//book.AddContact("Vlad", "1", "1");
-	//book.AddContact("Vlad", "2", "2");
-	//book.AddContact("Vlad", "3", "3");
-	//book.AddContact("Vas9", "kek", "lol");
-	//book.ShowAllContacts();
-	//book.GetCountOfContacts();
-	//book.DeleteContact("Vlad");
-	//book.ShowAllContacts();
+	PhoneBook book;
+	book.AddContact("Vlad", "0", "0");
+	book.AddContact("Vlad", "1", "1");
+	book.AddContact("Vlad", "2", "2");
+	book.AddContact("Vlad", "3", "3");
+	book.AddContact("Vas9", "kek", "lol");
+	book.ShowAllContacts();
+	book.GetCountOfContacts();
+	book.DeleteContact("Vlad");
+	book.ShowAllContacts();
 
 	/*Triangl frst(5, 10);
 	cout << frst.GetArea() << endl;
